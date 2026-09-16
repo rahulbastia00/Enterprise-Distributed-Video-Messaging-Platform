@@ -3,6 +3,7 @@ import socket
 HOST = "127.0.0.1"
 PORT = 8080
 
+
 def parse_http_request(raw_data: str):
     """Splits raw text into Method, Path, Protocol, Headers, and Body."""
     lines = raw_data.split("\r\n")
@@ -28,6 +29,7 @@ def parse_http_request(raw_data: str):
     # Body (everything after the blank line delimiter)
     body = "\r\n".join(lines[idx + 1 :])
     return method, path, version, headers, body
+
 
 def run_server():
     # AF_INET = IPv4, SOCK_STREAM = TCP
@@ -64,6 +66,7 @@ def run_server():
         full_response = status_line + response_headers + response_body
         client_conn.sendall(full_response.encode("utf-8"))
         client_conn.close()
+
 
 if __name__ == "__main__":
     run_server()
